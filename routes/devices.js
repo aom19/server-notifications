@@ -21,17 +21,19 @@ const router = express.Router();
 const Device = require("../models/device");
 
 router.post("/add", async (req, res) => {
-  // console.log(req.body);
+  // console.log(JSON.parse(req.body));
   try {
-    const hashedPassword = await bcrypt.hash(req.body.password, 12);
+    // const hashedPassword = await bcrypt.hash(req.body.password, 12);
+    // console.log(hashedPassword);
+    console.log(req.body);
     const device = new Device({
-      email: req.body.email,
-      password: hashedPassword,
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      phoneNumber: req.body.phoneNumber,
-      address: req.body.address,
-      pushSubscription: JSON.stringify(req.body.pushSubscription),
+      email: req.body.values.email,
+      password: req.body.values.password,
+      firstName: req.body.values.firstName,
+      lastName: req.body.values.lastName,
+      phoneNumber: req.body.values.phoneNumber,
+      address: req.body.values.address,
+      pushSubscription: JSON.stringify(req.body.values.pushSubscription),
     });
     console.log(device);
     await device
