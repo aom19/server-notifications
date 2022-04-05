@@ -22,28 +22,24 @@ const Device = require("../models/device");
 
 router.post("/add", async (req, res) => {
   // console.log(JSON.parse(req.body));
-  try {
-    // const hashedPassword = await bcrypt.hash(req.body.password, 12);
-    // console.log(hashedPassword);
-    console.log(req.body);
-    const device = new Device({
-      email: req.body.values.email,
-      password: req.body.values.password,
-      firstName: req.body.values.firstName,
-      lastName: req.body.values.lastName,
-      phoneNumber: req.body.values.phoneNumber,
-      address: req.body.values.address,
-      pushSubscription: JSON.stringify(req.body.values.pushSubscription),
-    });
-    console.log(device);
-    await device
-      .save()
-      .then(() => res.json("Device created "))
-      .catch((err) => res.status(400).json(`Error : ${err}`));
-  } catch (err) {
-    console.log(err);
-    throw err;
-  }
+
+  // const hashedPassword = await bcrypt.hash(req.body.password, 12);
+  // console.log(hashedPassword);
+  console.log(req.body);
+  const device = new Device({
+    email: req.body.values.email,
+    password: req.body.values.password,
+    firstName: req.body.values.firstName,
+    lastName: req.body.values.lastName,
+    phoneNumber: req.body.values.phoneNumber,
+    address: req.body.values.address,
+    pushSubscription: JSON.stringify(req.body.values.pushSubscription),
+  });
+  console.log(device);
+  await device
+    .save()
+    .then(() => res.json("Device created "))
+    .catch((err) => res.status(400).json(`Error : ${err}`));
 });
 //get all
 router.get("/", (req, res) => {
